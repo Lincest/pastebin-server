@@ -11,3 +11,21 @@ services:
       - ./data:/data
     command: redis-server /etc/redis/redis.conf --appendonly yes
     privileged: true
+    networks:
+      - server
+  pastebin-server:
+    image: moreality/pastebin-server:latest
+    container_name: pastebin
+    depends_on: 
+      - "redis"
+    ports: 
+      - "9989:9989"
+    networks:
+      - server
+    volumes:
+      - ./config.yml:/config.yml
+
+networks:
+  server:
+    driver:
+      bridge

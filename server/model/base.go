@@ -12,6 +12,8 @@ const (
 	CodeErr = -1
 )
 
+var Config *Conf
+
 // BasicResp 基本返回值
 type BasicResp struct {
 	Code int         `json:"code"`
@@ -37,10 +39,17 @@ func NewErrBasicResp() *BasicResp {
 	}
 }
 
+type Paste struct {
+	Data    string `json:"data" form:"data" binding:"required"`
+	Expired int8   `json:"expired" form:"expired" binding:"omitempty"`
+}
+
 type Conf struct {
 	Redis RedisConf `yaml:"redis"`
+	Port  string    `yaml:"port"`
 }
 
 type RedisConf struct {
 	RequirePass string `yaml:"requirepass"`
+	Addr        string `yaml:"address"`
 }
