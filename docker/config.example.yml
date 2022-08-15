@@ -1,0 +1,4 @@
+port: 9989
+redis:
+  address: redis:6379
+  requirepass: yourpassword
